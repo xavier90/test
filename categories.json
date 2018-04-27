@@ -1,0 +1,190 @@
+{
+  "living":{
+    "categoryId": "17006",
+    "subCategory": {
+      "sofas":"11000",
+      "sectional sofas":"11001",
+      "loveseats":"11002",
+      "futons & sleepers":"11003",
+      "accent chairs":"11004",
+      "ottomans":"11005",
+      "lounge chairs":"11006",
+      "recliners":"11007",
+      "coffee tables":"11008",
+      "end tables":"11009",
+      "media storage":"11010",
+      "tv stand":"11011",
+      "console tables":"11012",
+      "others":"11085"
+    }
+  },
+  "bedroom":{
+    "categoryId":"16703",
+    "subCategory": {
+      "beds":"11013",
+      "dresser & chest":"11014",
+      "nightstand":"11015",
+      "benches":"11016",
+      "armoires & wardrobes":"11017",
+      "bedding":"11018",
+      "headboard":"11019",
+      "others":"11086"
+    }
+  },
+  "dining":{
+    "categoryId":"18243",
+    "subCategory": {
+      "tables":"11020",
+      "chairs":"11021",
+      "barstool":"11022",
+      "sideboard":"11023",
+      "cabinet":"11024",
+      "cart":"11025",
+      "others":"11087"
+    }
+  },
+  "office":{
+    "categoryId":"16566",
+    "subCategory": {
+      "desks":"11026",
+      "bookcases":"11027",
+      "office chairs":"11028",
+      "cabinet":"11029",
+      "storage & shelves":"11084",
+      "others":"11088"
+    }
+  },
+  "kids":{
+    "categoryId":"10003",
+    "subCategory": {
+      "bedroom":{
+        "subCategoryId":"16703",
+        "subSection": {
+          "beds":"12000",
+          "bunk":"12001",
+          "dresser & chest":"12002",
+          "nightstand":"12003",
+          "headboard":"12004",
+          "vanities":"12005",
+          "canopies":"12006",
+          "others":"12025"
+        }
+      },
+      "nursery":{
+        "subCategoryId":"16627",
+        "subSection":{
+          "cribs":"12007",
+          "gliders & ottomans":"12008",
+          "changing tables":"12009",
+          "cradles & bassinets":"12010",
+          "nursery storage":"12011",
+          "others":"12026"
+        }
+      },
+      "playroom":{
+        "subCategoryId":"10005",
+        "subSection":{
+          "tents":"12012",
+          "seatings":"12013",
+          "table & chair Sets":"12014",
+          "bookcases":"12015",
+          "desks":"12016",
+          "toy organizers":"12017",
+          "others":"12027"
+        }
+      },
+      "decor":{
+        "subCategoryId":"10001",
+        "subSection":{
+          "wall art":"12018",
+          "curtains":"12019",
+          "wall stickers":"12020",
+          "baby mobiles":"12021",
+          "pillows":"12022",
+          "growth charts":"12023",
+          "stuffed animals":"12024",
+          "others":"12028"
+        }
+      },
+      "others":{
+        "subCategoryId":"11089",
+        "subSection":{
+          "others":"12029"
+        }
+      }
+    }
+  },
+  "outdoor":{
+    "categoryId":"10000",
+    "subCategory": {
+      "accent chairs":"11030",
+      "lounge chairs":"11031",
+      "benches":"11032",
+      "dining chairs":"11033",
+      "bar stools":"11034",
+      "daybeds":	"11035",
+      "conversation sets":	"11036",
+      "ottomans":	"11037",
+      "garden stools":"11038",
+      "dining tables":	"11039",
+      "side tables":	"11040",
+      "bar tables":	"11041",
+      "console tables":	"11042",
+      "coffee Tables":	"11043",
+      "swings":	"11044",
+      "hammock":	"11045",
+      "umbrellas":	"11046",
+      "pillows":	"11047",
+      "rugs":	"11048",
+      "wall decor":	"11049",
+      "statues & sculptures":	"11050",
+      "garden decor":	"11051",
+      "planters":	"11052",
+      "others":"11090"
+    }
+  },
+  "accessories":{
+    "categoryId":"10001",
+    "subCategory": {
+      "map":	"11053",
+      "floral & plant":	"11054",
+      "animal":	"11055",
+      "textual":	"11056",
+      "coastal":	"11057",
+      "abstract":	"11058",
+      "wall Decorator":	"11059",
+      "photography":	"10006",
+      "pillows": 	"11060",
+      "throws":	"11061",
+      "trays":	"11062",
+      "placements":	"11063",
+      "plates":	"11064",
+      "table Runners":	"11065",
+      "bowls":	"11066",
+      "others":	"11067",
+      "wall mirrors":	"11068",
+      "floor mirrors":	"11069",
+      "candles & holders":	"11070",
+      "vases":	"11071",
+      "rugs":	"11072",
+      "curtains":	"11073",
+      "flowers & plants":	"11074",
+      "others":"11091"
+    }
+  },
+  "lighting":{
+    "categoryId":"10004",
+    "subCategory": {
+      "floor lamps":	"11075",
+      "table lamps":	"11076",
+      "chandeliers":	"11077",
+      "pendants":	"11078",
+      "mounts & tracking":"11079",
+      "wall lights":	"11080",
+      "outdoor lighting":	"11081",
+      "holiday lighting":	"11082",
+      "ceiling fans":	"11083",
+      "others":"11092"
+    }
+  }
+}
