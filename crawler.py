@@ -9,7 +9,7 @@ import gc
 
 import os
 import psutil
-
+import threading
 
 
 
@@ -19,11 +19,12 @@ class WebPage(QtWebEngineWidgets.QWebEnginePage):
         self.loadFinished.connect(self.handleLoadFinished)
         self.cur_product_array = []
         self.flag_download = False
-        self.outfile = open('result.json', 'w')
-        self.outfile.write('[\n')
+        
 
-    def setHelperPara(self, categoryName):
+
+    def setHelperPara(self, categoryName, outfile):
         self.categoryName = categoryName
+        self.outfile = outfile
 
     def setCategoryDic(self, search_dic, category_id):
         self.search_dic = search_dic
@@ -74,31 +75,47 @@ class WebPage(QtWebEngineWidgets.QWebEnginePage):
         
     
 
-
 if __name__ == '__main__':
     start_urls = module.get_start_urls()
     
     search_dic, category_id = Util.category()
+    outfile = open('result.json', 'a')
+    outfile.write('[\n')
+    target_url = []
 
-    app = QtWidgets.QApplication(sys.argv)
-    
-
-    webpage = WebPage()
-    webpage.setCategoryDic(search_dic, category_id)
-    process = psutil.Process(os.getpid())
-
-
-    for cate in start_urls:
-        print "[ DM_info ] " + cate
-        webpage.setHelperPara(cate)
+    def cate_worker(search_dic, category_id, cate, outfile, start_urls):
+        app = QtWidgets.QApplication(sys.argv)
+        webpage = WebPage()
+        webpage.setCategoryDic(search_dic, category_id)
+        process = psutil.Process(os.getpid())
+        webpage.setHelperPara(cate, outfile)
 
         webpage.start(start_urls[cate], False)
-        app.exec_()
+        global target_url
+        target_url = list(set(webpage.cur_product_array))
+        sys.exit(app.exec_())
+
+    def download_worker(search_dic, category_id, cate, outfile, target_url):
+        app = QtWidgets.QApplication(sys.argv)
+        webpage = WebPage()
+        webpage.setCategoryDic(search_dic, category_id)
+        process = psutil.Process(os.getpid())
+        webpage.setHelperPara(cate, outfile)
+        webpage.start(target_url, True)
+        sys.exit(app.exec_())
+
+    for cate in start_urls:
+
+        print "[ DM_info ] " + cate
+        worker1 = threading.Thread(target=cate_worker, args=(search_dic, category_id, cate, outfile, start_urls,))
+        worker1.start()
+        worker1.join()
+
 
         print "[ DM_info ] start downloading product for " + cate
-        target_url = list(set(webpage.cur_product_array))
-        webpage.start(target_url, True)
-        app.exec_()
+        worker2 = threading.Thread(target=download_worker, args=(search_dic, category_id, cate, outfile, target_url,))
+        worker2.start()
+        worker2.join()
 
-    sys.exit(app)
+
 

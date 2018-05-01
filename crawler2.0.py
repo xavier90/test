@@ -18,20 +18,25 @@ class WebPage(QtWebEngineWidgets.QWebEnginePage):
         super(WebPage, self).__init__()
         self.loadFinished.connect(self.handleLoadFinished)
         self.cur_product_array = []
-        self.flag_download = False
         self.outfile = open('result.json', 'w')
         self.outfile.write('[\n')
 
-    def setHelperPara(self, categoryName):
-        self.categoryName = categoryName
 
     def setCategoryDic(self, search_dic, category_id):
         self.search_dic = search_dic
         self.category_id = category_id
 
-    def start(self, urls, flag_download):
+
+    def start_crawler(self, start_url_dic):
+        for cate, urls in start_url_dic.items():
+            self.flag_download = False
+            self.categoryName = cate
+
+            self.start(urls)
+
+    def start(self, urls):
+        self.load_cnt += len(urls)
         self._urls = iter(urls)
-        self.flag_download = flag_download
         self.fetchNext()
 
     def fetchNext(self):
@@ -56,7 +61,14 @@ class WebPage(QtWebEngineWidgets.QWebEnginePage):
             self.getProductUrlArray(html)
 
         if not self.fetchNext():
-            QtWidgets.qApp.quit()
+
+            if not self.flag_download:
+                self.flag_download = True
+                download_list = list(set(self.cur_product_array))
+                # self._urls = iter(download_list)
+                self.start(download_list)
+            else:
+                QtWidgets.qApp.quit()
 
             # # after download finished, close file
             # if not self.flag_category_or_detail:
@@ -85,7 +97,7 @@ if __name__ == '__main__':
     webpage.setCategoryDic(search_dic, category_id)
     process = psutil.Process(os.getpid())
 
-    webpage.start(start_urls)
+    webpage.start_crawler(start_urls)
 
     sys.exit(app.exec_())
 
