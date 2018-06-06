@@ -11,20 +11,13 @@ import os
 import psutil
 
 
-
-
 class WebPage(QtWebEngineWidgets.QWebEnginePage):
     def __init__(self):
         super(WebPage, self).__init__()
         self.loadFinished.connect(self.handleLoadFinished)
-        self.cur_product_array = []
+        self.product_dic = {}
         self.outfile = open('result.json', 'w')
         self.outfile.write('[\n')
-
-
-    def setCategoryDic(self, search_dic, category_id):
-        self.search_dic = search_dic
-        self.category_id = category_id
 
 
     def start_crawler(self, start_url_dic):
@@ -67,8 +60,7 @@ class WebPage(QtWebEngineWidgets.QWebEnginePage):
                 download_list = list(set(self.cur_product_array))
                 # self._urls = iter(download_list)
                 self.start(download_list)
-            else:
-                QtWidgets.qApp.quit()
+
 
             # # after download finished, close file
             # if not self.flag_category_or_detail:
@@ -82,20 +74,20 @@ class WebPage(QtWebEngineWidgets.QWebEnginePage):
     # get product url array
     def getProductUrlArray(self, html):
         soup = bs.BeautifulSoup(html, 'html.parser')
-        self.cur_product_array += ["https://www.crateandbarrel.com"+e['href'] for e in soup.select("a.product-miniset-thumbnail")]
+        self.product_dic.setdefault(self.cate, [])
+        self.cur_product_array[self.cate] += ["https://www.crateandbarrel.com"+e['href'] for e in soup.select("a.product-miniset-thumbnail")]
         
     
 
 
 if __name__ == '__main__':
     start_urls = module.get_start_urls()
-    search_dic, category_id = Util.category()
 
     app = QtWidgets.QApplication(sys.argv)
     
     webpage = WebPage()
-    webpage.setCategoryDic(search_dic, category_id)
-    process = psutil.Process(os.getpid())
+
+    # process = psutil.Process(os.getpid())
 
     webpage.start_crawler(start_urls)
 
